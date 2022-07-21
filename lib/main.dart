@@ -5,7 +5,7 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  const MyApp({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
 }
 
 class FirstPage extends StatefulWidget {
-  const FirstPage({Key? key}) : super(key: key);
+  const FirstPage({Key key}) : super(key: key);
 
   @override
   State<FirstPage> createState() => _FirstPageState();
@@ -27,13 +27,10 @@ class _FirstPageState extends State<FirstPage> {
   int number = 0;
   void increment() {
     number++;
-    setState(() {});
   }
 
   void decrement() {
     number--;
-
-    setState(() {});
   }
 
   @override
@@ -72,7 +69,15 @@ class _FirstPageState extends State<FirstPage> {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: <Widget>[
                   TextButton(
-                    onPressed: decrement,
+                    onPressed: () {
+                      if (number <= 0) {
+                        return 0;
+                      }
+                      ;
+
+                      setState(() {});
+                      decrement();
+                    },
                     style: TextButton.styleFrom(primary: Colors.blue[800]),
                     child: Icon(
                       Icons.remove_circle,
@@ -81,7 +86,10 @@ class _FirstPageState extends State<FirstPage> {
                   ),
                   TextButton(
                     style: TextButton.styleFrom(primary: Colors.blue[800]),
-                    onPressed: increment,
+                    onPressed: () {
+                      increment();
+                      setState(() {});
+                    },
                     child: Icon(
                       Icons.add_circle,
                       size: 60,
